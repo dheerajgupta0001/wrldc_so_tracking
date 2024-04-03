@@ -1,0 +1,93 @@
+﻿@page
+@model WebApp.Pages.Pams.DetailsModel
+@using Core.Entities
+
+@{
+    ViewData["Title"] = "Proposal Details";
+}
+<div class="container">
+    <div>
+        <div class="row">
+            <div class="col-md-12" style="text-align: center;">
+                <table style="margin: auto;">
+                    <tbody>
+                        <tr>
+                            <td style="text-align:center">
+                                <span><b>Grid Controllers of India Limited</b></span><br>
+                                <span style="font-size:small"><b>(A Government of India Enterprise)</b></span><br>
+                                <span><b>WRLDC</b></span>
+                            </td>
+                            <td>
+                                <img src="~/assets/img/logo.png" width="100px" height="100px" style="float:right">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+
+                <span class="sectionHeading">Pam Id: </span>
+                <span>@Html.DisplayFor(model => model.Pam.Id)</span> <br /><br />
+
+                <span class="sectionHeading">Sub Station</span>
+                <span>
+                    @Html.DisplayFor(model => model.Pam.SubStation)
+                </span> <br /><br />
+
+                <span class="sectionHeading">Owner</span>
+                <span>
+                    @Html.DisplayFor(model => model.Pam.Owner)
+                </span> <br /><br />
+
+                <span class="sectionHeading">Category</span>
+                <span>
+                    @Html.DisplayFor(model => model.Pam.Category)
+                </span> <br /><br />
+
+                <span class="sectionHeading">Department</span>
+                <span>@Html.DisplayFor(model => model.Pam.Department)</span><br /><br />
+
+                <span class="sectionHeading">Description</span>
+                <span>@Html.DisplayFor(model => model.Pam.Description)</span><br /><br />
+
+                <span class="sectionHeading">StatusDate</span>
+                <span>@Html.DisplayFor(model => model.Pam.StatusDate)</span><br /><br />
+
+                <span class="sectionHeading">Created By: </span>
+                <span>@Html.DisplayFor(model => model.Pam.CreatedBy)</span><br /><br />
+
+                <span class="sectionHeading">Creation Date: </span>
+                <span>@Html.DisplayFor(model => model.Pam.Created)</span><br />
+
+
+            </div>
+        </div>
+        <div>
+            <a asp-page="./Edit" asp-route-id="@Model.Pam.Id" class="btn btn-info">Edit</a> |
+            <a asp-page="./Index" class="btn btn-primary">Back to List</a>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/numToWords.js"></script>
+    <style>
+        body {
+            background-color: transparent;
+        }
+
+        .sectionHeading {
+            font-weight: bold;
+        }
+
+        .rightAlign {
+            text-align: right;
+        }
+
+        .leftMargin1cm {
+            margin-left: 1cm;
+        }
+    </style>
+}

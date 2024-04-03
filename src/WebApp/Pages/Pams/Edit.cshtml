@@ -1,0 +1,83 @@
+﻿@page
+@model WebApp.Pages.Pams.EditModel
+
+@{
+    ViewData["Title"] = "Edit Pam";
+}
+<div class="container">
+    <h1>Edit Pam</h1>
+
+    <hr />
+    <div class="row">
+        <div class="col-md-8">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Pam.SubStationId" class="control-label required-field">Sub Station</label>
+                    <select asp-for="Pam.SubStationId" class="form-control" asp-items="Model.SubStationOptions"></select>
+                    <span asp-validation-for="Pam.SubStationId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Pam.OwnerId" class="control-label required-field">Owner</label>
+                    <select asp-for="Pam.OwnerId" class="form-control" asp-items="Model.OwnerOptions"></select>
+                    <span asp-validation-for="Pam.OwnerId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Pam.Category" class="control-label required-field">Category</label>
+                    @*<input asp-for="Pam.IndentingDept" class="form-control" />*@
+                    <select asp-for="Pam.Category" class="form-control" asp-items="Model.CategoryOptions"></select>
+                    <span asp-validation-for="Pam.Category " class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Pam.DepartmentId" class="control-label required-field">Department</label>
+                    @*<input asp-for="Pam.IndentingDept" class="form-control" />*@
+                    <select asp-for="Pam.DepartmentId" class="form-control" asp-items="Model.DeptOptions"></select>
+                    <span asp-validation-for="Pam.DepartmentId " class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Pam.Description" class="control-label required-field">Description</label>
+                    <input asp-for="Pam.Description" class="form-control" />
+                    <span asp-validation-for="Pam.Description " class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Pam.Status" class="control-label required-field">Status</label>
+                    @*<input asp-for="Pam.IndentingDept" class="form-control" />*@
+                    <select asp-for="Pam.Status" class="form-control" asp-items="Model.StatusOptions"></select>
+                    <span asp-validation-for="Pam.Status " class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Pam.StatusDate">Status Date </label>
+                    <input asp-for="Pam.StatusDate" class="form-control" />
+                    <span asp-validation-for="Pam.StatusDate" class="text-danger"></span>
+                </div>
+                <input type="hidden" asp-for="Pam.Id" />
+                <div class="form-group">
+                    <input type="submit" value="Update Proposal" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-page="./Index">Back to List</a>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <style>
+        tooltip-inner {
+            max-width: 80% !important;
+        }
+
+        label.control-label {
+            color: saddlebrown;
+            font-weight: 400;
+        }
+        .required-field::after {
+            content: "*";
+            color: red;
+            font-size: 21px;
+            font-weight: 900;
+        }
+    </style>
+}

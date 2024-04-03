@@ -1,0 +1,201 @@
+﻿@page
+@model WebApp.Pages.Pams.IndexModel
+
+@{ ViewData["Title"] = "WRLDC Pam"; }
+
+
+
+<div class="row justify-content-center align-items-center">
+    <div class="col col-md-12">
+        <h2>@ViewData["Title"]</h2>
+        <hr />
+        <p>
+            <a asp-page="Create" class="btn btn-success btn-sm">Create New</a>
+        </p>
+        <table class="table table-bordered table-hover display" id="pam_table">
+            <thead>
+                <tr>
+                    <th>
+                        Pam Id
+                    </th>
+                    <th>
+                        SubStation
+                    </th>
+                    <th>
+                        Owner
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Department
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Pam[0].CreatedBy)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Pam[0].Created)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Pam)
+            {
+            <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubStation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Owner)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Department)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Created)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm btn-block">Edit</a>
+                        <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-info btn-sm btn-block">Details</a>
+                        <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm btn-block">Delete</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>
+                        Pam Id
+                    </th>
+                    <th>
+                        SubStation
+                    </th>
+                    <th>
+                        Owner
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Department
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Pam[0].CreatedBy)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Pam[0].Created)
+                    </th>
+                    <th></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+@section Scripts{
+    @*<link rel="stylesheet" href="~/js/node_modules/datatables.net-dt/css/jquery.dataTables.min.css" />*@
+    <link rel="stylesheet" href="~/js/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css" />
+    <link rel="stylesheet" href="~/css/datatables/fixedHeader.dataTables.min.css" />
+    <link rel="stylesheet" href="~/js/node_modules/datatables.net-buttons-dt/css/buttons.dataTables.min.css" />
+    <script src="~/js/node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/js/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/js/node_modules/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/js/node_modules/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="~/js/node_modules/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/js/node_modules/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="~/js/node_modules/jszip/dist/jszip.min.js"></script>
+    <script src="~/js/node_modules/pdfmake/build/pdfmake.min.js"></script>
+    <script src="~/js/node_modules/pdfmake/build/vfs_fonts.js"></script>
+    <script src="~/js/node_modules/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script>
+
+        function strtrunc(str, max, add) {
+            add = add || '...';
+            return (typeof str === 'string' && str.length > max ? str.substring(0, max) + add : str);
+        };
+
+        $(document).ready(function () {
+            // https://datatables.net/examples/api/multi_filter.html
+            // Setup - add a text input to each footer cell
+            $('#despatch_table tfoot th').each(function () {
+                //var title = $(this).text();
+                $(this).html('<input type="text" placeholder="Search" />');
+            });
+
+            var despatch_table = $('#despatch_table').DataTable({
+                fixedHeader: true,
+                "lengthMenu": [[10, 20, 50, 100, -1], [10, 20, 50, 100, "All"]],
+                "pageLength": 50,
+                dom: 'Bfrtip',
+                "order": [[0, "asc"]],
+                buttons: ['pageLength', 'copy', 'csv', 'excel', 'pdf', 'print'],
+
+                'columnDefs': [
+                    {
+                        'targets': [3, 4, 5],
+                        'render': function (data, type, full, meta) {
+                            if (type === 'display') {
+                                data = strtrunc(data, 20);
+                            }
+
+                            return data;
+                        }
+                    }
+                ],
+            });
+
+            var r = $('#despatch_table tfoot tr');
+            r.find('th').each(function () {
+                $(this).css('padding', '3px');
+            });
+
+            $('#despatch_table thead').append(r);
+
+            // Apply the filter
+            // https://www.jqueryscript.net/demo/DataTables-Jquery-Table-Plugin/examples/api/multi_filter.html
+            $("#despatch_table thead input").on('keyup change', function () {
+                despatch_table
+                    .column($(this).parent().index() + ':visible')
+                    .search(this.value)
+                    .draw();
+            });
+        });
+
+    </script>
+    <style>
+        thead input {
+            padding: 2px;
+            box-sizing: border-box;
+            font-size: small;
+            width: 100%
+        }
+    </style>
+}
