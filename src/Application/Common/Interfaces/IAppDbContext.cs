@@ -13,6 +13,7 @@ public interface IAppDbContext
     DbSet<Designation> Designations { get; set; }
     DbSet<Owner> Owners { get; set; }
     DbSet<SubStation> SubStations { get; set; }
+    DbSet<ReferenceNumber> ReferenceNumbers { get; set; }
     DbSet<Pam> Pams { get; set; }
 
 

@@ -39,6 +39,11 @@
                     <span asp-validation-for="Pam.Description " class="text-danger"></span>
                 </div>
                 <div class="form-group">
+                    <label asp-for="Pam.Remarks" class="control-label required-field">Remarks</label>
+                    <input asp-for="Pam.Remarks" class="form-control" />
+                    <span asp-validation-for="Pam.Remarks " class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="Pam.Status" class="control-label required-field">Status</label>
                     @*<input asp-for="Pam.IndentingDept" class="form-control" />*@
                     <select asp-for="Pam.Status" class="form-control" asp-items="Model.StatusOptions"></select>

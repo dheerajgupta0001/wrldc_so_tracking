@@ -25,6 +25,9 @@ public class GetPamByIdQueryHandler : IRequestHandler<GetPamByIdQuery, Pam>
     async Task<Pam> IRequestHandler<GetPamByIdQuery, Pam>.Handle(GetPamByIdQuery request, CancellationToken cancellationToken)
     {
         Pam res = await _context.Pams.Where(co => co.Id == request.Id)
+                                        .Include(n => n.Owner)
+                                        .Include(n => n.SubStation)
+                                        .Include(n => n.Department)
                                         .FirstOrDefaultAsync(cancellationToken: cancellationToken);
         return res;
     }

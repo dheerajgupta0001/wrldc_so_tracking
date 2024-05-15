@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FluentValidation.AspNetCore;
+using FluentValidation.Results;
+using Application.Common.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Core.Entities;
@@ -11,6 +14,7 @@ using Application.Pams;
 using Application.Departments.Queries.GetDepartments;
 using Application.SubStations.Queries.GetSubStations;
 using Application.Owners.Queries.GetOwners;
+using FluentValidation;
 
 namespace WebApp.Pages.Pams;
 
@@ -19,12 +23,16 @@ public class EditModel : PageModel
     private readonly ILogger<EditModel> _logger;
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
+    private readonly IAppDbContext _context;
+
     public EditModel(ILogger<EditModel> logger,
-                     IMediator mediator, IMapper mapper)
+                     IMediator mediator, IMapper mapper, IAppDbContext context)
     {
         _logger = logger;
         _mediator = mediator;
         _mapper = mapper;
+        _context = context;
+        _context = context;
     }
 
     [BindProperty]
@@ -50,7 +58,7 @@ public class EditModel : PageModel
             return NotFound();
         }
 
-        InitSelectListItems(pam);
+        await InitSelectListItems(pam);
 
         Pam = _mapper.Map<EditPamCommand>(pam);
 
@@ -67,8 +75,10 @@ public class EditModel : PageModel
         {
             return NotFound();
         }
+        // ValidationResult validationCheck = new EditPamCommandValidator().Validate(pam);
+        // validationCheck.AddToModelState(ModelState, nameof(pam));
 
-        InitSelectListItems(pam);
+        await InitSelectListItems(pam);
 
         if (!ModelState.IsValid)
         {
@@ -93,7 +103,7 @@ public class EditModel : PageModel
         return Page();
     }
 
-    public async void InitSelectListItems(Pam pam)
+    public async Task InitSelectListItems(Pam pam)
     {
         DeptOptions = new SelectList(await _mediator.Send(new GetDepartmentsQuery()), "Id", "Name");
         SubStationOptions = new SelectList(await _mediator.Send(new GetSubStationsQuery()), "Id", "Name");

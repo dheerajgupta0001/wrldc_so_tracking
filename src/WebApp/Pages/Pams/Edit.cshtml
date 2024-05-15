@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-md-8">
             <form method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Pam.SubStationId" class="control-label required-field">Sub Station</label>
                     <select asp-for="Pam.SubStationId" class="form-control" asp-items="Model.SubStationOptions"></select>
@@ -40,6 +40,11 @@
                     <span asp-validation-for="Pam.Description " class="text-danger"></span>
                 </div>
                 <div class="form-group">
+                    <label asp-for="Pam.Remarks" class="control-label required-field">Remarks</label>
+                    <input asp-for="Pam.Remarks" class="form-control" />
+                    <span asp-validation-for="Pam.Remarks " class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="Pam.Status" class="control-label required-field">Status</label>
                     @*<input asp-for="Pam.IndentingDept" class="form-control" />*@
                     <select asp-for="Pam.Status" class="form-control" asp-items="Model.StatusOptions"></select>
@@ -59,7 +64,7 @@
     </div>
 
     <div>
-        <a asp-page="./Index">Back to List</a>
+        <a asp-page="./Index" class="btn btn-info" >Back to List</a>
     </div>
 </div>
 @section Scripts {

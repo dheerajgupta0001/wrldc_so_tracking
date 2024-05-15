@@ -1,5 +1,14 @@
-﻿namespace Application.Pams.Commands.EditPam;
+﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
+using System;
 
-class EditPamCommandValidator
-{
+namespace Application.Pams.Commands.EditPam
+{ 
+    public class EditPamCommandValidator : AbstractValidator<EditPamCommand>
+        {
+            public EditPamCommandValidator()
+            {
+                RuleFor(x => x.Id).NotEmpty();
+            }
+        }
 }

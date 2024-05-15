@@ -1,6 +1,8 @@
-﻿namespace Core.Common;
-
-public class BaseEntity
+﻿namespace Core.Common
 {
-    public int Id { get; set; }
+    public class BaseEntity
+    {
+        public int Id { get; set; }
+    }
 }
+

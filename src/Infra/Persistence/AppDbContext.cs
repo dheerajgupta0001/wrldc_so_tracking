@@ -19,6 +19,7 @@ public class AppDbContext : IdentityDbContext<ApplicationUser>, IAppDbContext
     public DbSet<Designation> Designations { get; set; }
     public DbSet<Owner> Owners { get; set; }
     public DbSet<SubStation> SubStations { get; set; }
+    public DbSet<ReferenceNumber> ReferenceNumbers { get; set; }
     public DbSet<Pam> Pams { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options, ICurrentUserService currentUserService)

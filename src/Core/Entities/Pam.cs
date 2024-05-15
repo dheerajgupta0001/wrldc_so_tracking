@@ -26,5 +26,7 @@ public class Pam : AuditableEntity
 
     public string Status { get; set; }
 
+    public string Remarks { get; set; }
+
     public DateTime StatusDate { get; set; }
 }

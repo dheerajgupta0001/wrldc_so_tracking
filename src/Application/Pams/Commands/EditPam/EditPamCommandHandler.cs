@@ -34,7 +34,7 @@ public class EditPamCommandHandler : IRequestHandler<EditPamCommand, List<string
         ApplicationUser curUsr = await _userManager.FindByIdAsync(curUsrId);
         if (curUsr == null)
         {
-            var errorMsg = "User not found for editing proposal";
+            var errorMsg = "PAM not found for editing proposal";
             _logger.LogError(errorMsg);
             return new List<string>() { errorMsg };
         }
@@ -44,7 +44,7 @@ public class EditPamCommandHandler : IRequestHandler<EditPamCommand, List<string
 
         if (pam == null)
         {
-            string errorMsg = $"Proposal Id {request.Id} not present for editing";
+            string errorMsg = $"PAM Id {request.Id} not present for editing";
             return new List<string>() { errorMsg };
         }
 
@@ -52,7 +52,7 @@ public class EditPamCommandHandler : IRequestHandler<EditPamCommand, List<string
         IList<string> usrRoles = await _userManager.GetRolesAsync(curUsr);
         if (curUsr.UserName != pam.CreatedBy && !usrRoles.Contains(SecurityConstants.AdminRoleString))
         {
-            return new List<string>() { "This user is not authorized for updating this proposal since this is not his created by this user and he is not in admin role" };
+            return new List<string>() { "This user is not authorized for updating this proposal since this is not created by this user and he/she is not in admin role" };
         }
 
         if (pam.SubStationId != request.SubStationId) //new field
@@ -75,6 +75,10 @@ public class EditPamCommandHandler : IRequestHandler<EditPamCommand, List<string
         {
             pam.Description = request.Description;
         }
+        if (pam.Remarks != request.Remarks)
+        {
+            pam.Remarks = request.Remarks;
+        }
         if (pam.Status != request.Status)
         {
             pam.Status = request.Status;
@@ -92,7 +96,7 @@ public class EditPamCommandHandler : IRequestHandler<EditPamCommand, List<string
         {
             if (!_context.Pams.Any(e => e.Id == request.Id))
             {
-                return new List<string>() { $"Order Id {request.Id} not present for editing" };
+                return new List<string>() { $"Pam Id {request.Id} not present for editing" };
             }
             else
             {

@@ -25,6 +25,7 @@ class CreatePamCommandHandler : IRequestHandler<CreatePamCommand, List<string>>
             Category = request.Category,
             DepartmentId = request.DepartmentId,
             Description = request.Description,
+            Remarks = request.Remarks,
             Status = request.Status,
             StatusDate = request.StatusDate
 

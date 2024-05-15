@@ -25,6 +25,9 @@ public class DetailsModel : PageModel
         // create child entities for each proposal options
 
         Pam = await _context.Pams.Where(m => m.Id == id)
+                                        .Include(n => n.Owner)
+                                        .Include(n => n.SubStation)
+                                        .Include(n => n.Department)
                                     .FirstOrDefaultAsync();
         
         Date = Pam.Created.ToString("dd-MM-yyyy");

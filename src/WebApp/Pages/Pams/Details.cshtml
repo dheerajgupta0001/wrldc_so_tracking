@@ -34,12 +34,12 @@
 
                 <span class="sectionHeading">Sub Station</span>
                 <span>
-                    @Html.DisplayFor(model => model.Pam.SubStation)
+                    @Html.DisplayFor(model => model.Pam.SubStation.Name)
                 </span> <br /><br />
 
                 <span class="sectionHeading">Owner</span>
                 <span>
-                    @Html.DisplayFor(model => model.Pam.Owner)
+                    @Html.DisplayFor(model => model.Pam.Owner.Name)
                 </span> <br /><br />
 
                 <span class="sectionHeading">Category</span>
@@ -48,10 +48,13 @@
                 </span> <br /><br />
 
                 <span class="sectionHeading">Department</span>
-                <span>@Html.DisplayFor(model => model.Pam.Department)</span><br /><br />
+                <span>@Html.DisplayFor(model => model.Pam.Department.Name)</span><br /><br />
 
                 <span class="sectionHeading">Description</span>
                 <span>@Html.DisplayFor(model => model.Pam.Description)</span><br /><br />
+
+                <span class="sectionHeading">Remarks</span>
+                <span>@Html.DisplayFor(model => model.Pam.Remarks)</span><br /><br />
 
                 <span class="sectionHeading">StatusDate</span>
                 <span>@Html.DisplayFor(model => model.Pam.StatusDate)</span><br /><br />
@@ -66,8 +69,8 @@
             </div>
         </div>
         <div>
-            <a asp-page="./Edit" asp-route-id="@Model.Pam.Id" class="btn btn-info">Edit</a> |
-            <a asp-page="./Index" class="btn btn-primary">Back to List</a>
+            <a asp-page="./Edit" asp-route-id="@Model.Pam.Id" class="btn btn-primary">Edit</a> |
+            <a asp-page="./Index" class="btn btn-info">Back to List</a>
         </div>
     </div>
 </div>

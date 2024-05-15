@@ -3,30 +3,34 @@ using Core.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Application.Pams.Queries.GetPams;
+namespace Application.Pams.Queries.GetResolvedPams;
 
-public class GetPamsQuery : IRequest<List<Pam>>
+public class GetResolvedPamsQuery : IRequest<List<Pam>>
 {
-    public class GetPamsQueryHandler : IRequestHandler<GetPamsQuery, List<Pam>>
+    public class GetResolvedPamsQueryHandler : IRequestHandler<GetResolvedPamsQuery, List<Pam>>
     {
         private readonly IAppDbContext _context;
 
-        public GetPamsQueryHandler(IAppDbContext context)
+        public GetResolvedPamsQueryHandler(IAppDbContext context)
         {
             _context = context;
         }
 
-        public async Task<List<Pam>> Handle(GetPamsQuery request, CancellationToken cancellationToken)
+        public async Task<List<Pam>> Handle(GetResolvedPamsQuery request, CancellationToken cancellationToken)
         {
             List<Pam> res = await _context.Pams
                                             .Include(co => co.Owner)
                                             .Include(co => co.SubStation)
                                             .Include(co => co.Department)
                                             .ToListAsync();
-            return res;
+
+            List<Pam> resolvedRes = res.Where(p => p.Status == "Resolved")
+                .ToList();
+            return resolvedRes;
         }
     }
 }

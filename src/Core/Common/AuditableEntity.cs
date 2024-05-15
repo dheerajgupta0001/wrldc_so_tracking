@@ -1,14 +1,15 @@
 ﻿using System;
 
-namespace Core.Common;
-
-public class AuditableEntity: BaseEntity
+namespace Core.Common
 {
-    public string CreatedBy { get; set; }
+    public class AuditableEntity: BaseEntity
+    {
+        public string CreatedBy { get; set; }
 
-    public DateTime Created { get; set; } = DateTime.Now;
+        public DateTime Created { get; set; } = DateTime.Now;
 
-    public string LastModifiedBy { get; set; }
+        public string LastModifiedBy { get; set; }
 
-    public DateTime? LastModified { get; set; }
+        public DateTime? LastModified { get; set; }
+    }
 }

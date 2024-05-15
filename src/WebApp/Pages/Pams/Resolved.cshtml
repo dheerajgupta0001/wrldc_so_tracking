@@ -1,7 +1,7 @@
 ﻿@page
-@model WebApp.Pages.Pams.IndexModel
+@model WebApp.Pages.Pams.ResolvedModel
 
-@{ ViewData["Title"] = "Unresolved Pam"; }
+@{ ViewData["Title"] = "Resolved Pam"; }
 
 
 
@@ -11,7 +11,7 @@
         <hr />
         <p>
             <a asp-page="Create" class="btn btn-info btn-sm">Create New</a>
-            <a asp-page="Resolved" class="btn btn-success btn-sm">Resolved</a>
+            <a asp-page="Index" class="btn btn-warning btn-sm">Unresolved</a>
         </p>
         <table class="table table-bordered table-hover display" id="pam_table">
             <thead>
@@ -84,7 +84,7 @@
                          @Html.DisplayFor(modelItem => item.LastModified)
                     </td>
                     <td>
-                        <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-primary btn-sm btn-block">Edit</a>
+                        <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm btn-block">Edit</a>
                         <a asp-page="./Details" asp-route-id="@item.Id" class="btn btn-info btn-sm btn-block">Details</a>
                         <a asp-page="./Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm btn-block">Delete</a>
                     </td>
